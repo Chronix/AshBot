@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\irc">
+      <UniqueIdentifier>{bb63e138-4269-4b12-bb4f-640baf713252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\irc">
+      <UniqueIdentifier>{d1bf76e6-1405-44dc-9612-9549e8e8c205}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\commands">
+      <UniqueIdentifier>{7fcedac8-51eb-4c6e-b00a-4b45a74ba6f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\commands">
+      <UniqueIdentifier>{6a0fb19d-0f91-4ca0-867c-f0131f945c38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\db">
+      <UniqueIdentifier>{2988a3f1-f747-473d-9d0b-5372b8e66b8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\db">
+      <UniqueIdentifier>{b4ce678f-d251-4a55-92d3-9668a11784c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules">
+      <UniqueIdentifier>{78c75ee9-4b09-4770-ad71-d8f9c6965eb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules">
+      <UniqueIdentifier>{a02b2187-3282-4d6f-829d-dc5d2116ffa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\modules\songrequest">
+      <UniqueIdentifier>{fa7f36d3-1825-4310-a8b0-3566dc31ac07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\songrequest">
+      <UniqueIdentifier>{e5e00608-77e2-4feb-b0d1-a8813db97341}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\logging.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\globals.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\channel_context.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\irc\irc_client.cpp">
+      <Filter>Source Files\irc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\irc\irc_connection.cpp">
+      <Filter>Source Files\irc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\commands\command_registration.cpp">
+      <Filter>Source Files\commands</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\bot.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\db\db.cpp">
+      <Filter>Source Files\db</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\modules\bot_module.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\modules\songrequest\songrequest_provider.cpp">
+      <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\modules\songrequest\song.cpp">
+      <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\modules\songrequest\youtube_api.cpp">
+      <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\http_client.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\tokens.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\thread_pool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sub_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\twitch_api.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\logging.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\string_pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\channel_context.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\irc_message_data.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\object_cache.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\irc_client.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\irc_connection.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\irc_enums.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\rfc2812.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\irc_debug_data.h">
+      <Filter>Header Files\irc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\concurrent_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\mutex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\command_traits.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\access_level.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\bot_command.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\fun_commands.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\command_factory.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\command_id.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\bot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\db\db.h">
+      <Filter>Header Files\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\db\db_debug_data.h">
+      <Filter>Header Files\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\db_types.h">
+      <Filter>Header Files\db</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\bot_module.h">
+      <Filter>Header Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\songrequest_provider.h">
+      <Filter>Header Files\modules\songrequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\song.h">
+      <Filter>Header Files\modules\songrequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\songrequest.h">
+      <Filter>Header Files\modules\songrequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\youtube_api.h">
+      <Filter>Header Files\modules\songrequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\http_client.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\tokens.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\thread_pool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\blocking_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\sub_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\twitch_api.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ashbot.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

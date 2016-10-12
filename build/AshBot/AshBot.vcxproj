@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{23E258CD-2F18-4EE1-9BA0-E0F04447F39D}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AshBot</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(Path);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(Path);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/favor:INTEL64 /std:c++14 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/favor:INTEL64 /std:c++14 %(AdditionalOptions)</AdditionalOptions>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
+      <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\bot.cpp" />
+    <ClCompile Include="..\..\source\channel_context.cpp" />
+    <ClCompile Include="..\..\source\commands\command_registration.cpp" />
+    <ClCompile Include="..\..\source\db\db.cpp" />
+    <ClCompile Include="..\..\source\globals.cpp" />
+    <ClCompile Include="..\..\source\http_client.cpp" />
+    <ClCompile Include="..\..\source\irc\irc_client.cpp" />
+    <ClCompile Include="..\..\source\irc\irc_connection.cpp" />
+    <ClCompile Include="..\..\source\logging.cpp" />
+    <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\modules\bot_module.cpp" />
+    <ClCompile Include="..\..\source\modules\songrequest\song.cpp" />
+    <ClCompile Include="..\..\source\modules\songrequest\songrequest_provider.cpp" />
+    <ClCompile Include="..\..\source\modules\songrequest\youtube_api.cpp" />
+    <ClCompile Include="..\..\source\pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\..\source\sub_manager.cpp" />
+    <ClCompile Include="..\..\source\thread_pool.cpp" />
+    <ClCompile Include="..\..\source\tokens.cpp" />
+    <ClCompile Include="..\..\source\twitch_api.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\include\access_level.h" />
+    <ClInclude Include="..\..\include\ashbot.h" />
+    <ClInclude Include="..\..\include\blocking_queue.h" />
+    <ClInclude Include="..\..\include\bot.h" />
+    <ClInclude Include="..\..\include\channel_context.h" />
+    <ClInclude Include="..\..\include\commands\bot_command.h" />
+    <ClInclude Include="..\..\include\commands\command_factory.h" />
+    <ClInclude Include="..\..\include\commands\command_id.h" />
+    <ClInclude Include="..\..\include\commands\command_traits.h" />
+    <ClInclude Include="..\..\include\commands\fun_commands.h" />
+    <ClInclude Include="..\..\include\concurrent_queue.h" />
+    <ClInclude Include="..\..\include\db\db.h" />
+    <ClInclude Include="..\..\include\db\db_debug_data.h" />
+    <ClInclude Include="..\..\include\db_types.h" />
+    <ClInclude Include="..\..\include\http_client.h" />
+    <ClInclude Include="..\..\include\irc\irc_client.h" />
+    <ClInclude Include="..\..\include\irc\irc_connection.h" />
+    <ClInclude Include="..\..\include\irc\irc_debug_data.h" />
+    <ClInclude Include="..\..\include\irc\irc_enums.h" />
+    <ClInclude Include="..\..\include\irc\irc_message_data.h" />
+    <ClInclude Include="..\..\include\irc\rfc2812.h" />
+    <ClInclude Include="..\..\include\logging.h" />
+    <ClInclude Include="..\..\include\modules\bot_module.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\song.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\songrequest.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\songrequest_provider.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\youtube_api.h" />
+    <ClInclude Include="..\..\include\mutex.h" />
+    <ClInclude Include="..\..\include\object_cache.h" />
+    <ClInclude Include="..\..\include\pch.h" />
+    <ClInclude Include="..\..\include\string_pool.h" />
+    <ClInclude Include="..\..\include\sub_manager.h" />
+    <ClInclude Include="..\..\include\thread_pool.h" />
+    <ClInclude Include="..\..\include\tokens.h" />
+    <ClInclude Include="..\..\include\twitch_api.h" />
+    <ClInclude Include="..\..\include\util.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
