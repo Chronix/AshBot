@@ -1,5 +1,3 @@
-#include <string>
-
 #include <boost/assign/list_of.hpp>
 #include <boost/container/flat_map.hpp>
 #include <boost/xpressive/xpressive.hpp>
@@ -7,6 +5,7 @@
 #include "irc/irc_client.h"
 #include "irc/rfc2812.h"
 #include "logging.h"
+#include "util.h"
 
 namespace ashbot {
 
@@ -154,8 +153,8 @@ void irc_client::ev_logged_in()
     static const char TwitchCommandsReq[] = "CAP REQ :twitch.tv/commands\r\n";
     static const char TwitchTagsReq[] = "CAP REQ :twitch.tv/tags\r\n";
 
-    write_hardcoded_line(TwitchCommandsReq, sizeof(TwitchCommandsReq) - 1);
-    write_hardcoded_line(TwitchTagsReq, sizeof(TwitchTagsReq) - 1);
+    write_hardcoded_line(TwitchCommandsReq, static_strlen(TwitchCommandsReq));
+    write_hardcoded_line(TwitchTagsReq, static_strlen(TwitchTagsReq));
 }
 
 void irc_client::parse_message(irc_message_data* pData, const char* pLine) const
@@ -320,7 +319,7 @@ void irc_client::event_ping(irc_message_data* pData)
 {
     // hardcode this, very unlikely to change and easy to fix anyway
     static const char PongReply[] = "PONG :tmi.twitch.tv\r\n";
-    write_hardcoded_line(PongReply, sizeof(PongReply) - 1);
+    write_hardcoded_line(PongReply, static_strlen(PongReply));
 }
 
 void irc_client::event_error(irc_message_data* pData)
