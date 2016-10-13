@@ -14,7 +14,7 @@ int get_channel_subscribers(const char* pChannel, int limit, int offset, sub_man
     char url[128];
     int written = snprintf(url, array_size(url), URL_FORMAT, pChannel, limit, offset);
 
-    if (written < 0 || written > array_size(url) - 1)
+    if (written < 0 || written >= array_size(url))
     {
         AshBotLogFatal << "Subscriber API endpoint url overflow (channel: " << pChannel
                        << " limit: " << limit << " offset: " << offset << ")";
