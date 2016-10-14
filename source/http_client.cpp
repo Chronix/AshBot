@@ -81,7 +81,7 @@ void twitch_http_client::add_twitch_auth_headers()
 
     add_twitch_std_headers();
     char auth[128] = ASHBOT_OAUTH;
-    strncat(auth, tokens::twitch_user(), array_size(auth) - static_strlen(ASHBOT_OAUTH));
+    strncat(auth, tokens::twitch_user(), array_size(auth) - static_strlen<size_t>(ASHBOT_OAUTH));
     add_header("Authorization", auth);
 }
 }
