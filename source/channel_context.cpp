@@ -44,8 +44,8 @@ user_access_level channel_context::get_user_access_level(irc_message_data* pCont
 {
     if (strcmp(pContext->username, DevUsername) == 0) return user_access_level::dev;
     if (strcmp(pContext->username, BroadcasterUsername) == 0) return user_access_level::broadcaster;
-    if (pContext->isMod) return user_access_level::moderator;
-    if (pContext->isSub) return user_access_level::subscriber;
+    if (pContext->is_mod()) return user_access_level::moderator;
+    if (pContext->is_sub()) return user_access_level::subscriber;
     // todo: regular check here
     return user_access_level::pleb;
 }
@@ -132,7 +132,7 @@ bool channel_context::is_command_cooldown_ok(command_ptr& command, irc_message_d
     command_clock::time_point lastUse = cooldownMap_[command->id()];
     if (command_clock::now() - lastUse < command->cooldown_)
     {
-        return !command->restrictMods_ && pContext->isMod;
+        return !command->restrictMods_ && pContext->is_mod();
     }
 
     boost::upgrade_to_unique_lock<boost::shared_mutex> el(sl);

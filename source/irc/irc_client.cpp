@@ -53,9 +53,6 @@ const bx::cregex Nick = bx::bos >> ':' >> -*bx::_ >> " NICK " >> *bx::_ >> bx::e
 // "^:.*? PART .*$"
 const bx::cregex Part = bx::bos >> ':' >> -*bx::_ >> " PART " >> *bx::_ >> bx::eos;
 
-// "mod=([01]);subscriber=([01])"
-const bx::cregex MessageTags = "mod=" >> (bx::s1 = (bx::set = '0', '1')) >> -+bx::_ >> "subscriber=" >> (bx::s2 = (bx::set = '0', '1'));
-
 }
 
 using rc = reply_code;
@@ -205,13 +202,28 @@ void irc_client::parse_message(irc_message_data* pData, const char* pLine) const
 
 const char* irc_client::parse_tags(irc_message_data* pData, const char* pLine) const
 {
-    const char* ircMessageStart = strstr(pLine, " :") + 1;
+    const char* ircMessageStart = strchr(pLine, ' ') + 1;
+    const char* tags = pLine + 1;
 
-    bx::cmatch match;
-    if (regex_search(pLine, match, regex::MessageTags) && match.size() == 3)
+    while (tags != ircMessageStart)
     {
-        pData->isMod = *match[1].first == '1';
-        pData->isSub = *match[2].first == '1';
+        const char* separator = strpbrk(tags, "=; ");
+        std::string tagKey(tags, separator - tags);
+        unescape_tag_string(tagKey);
+        tags = separator + 1;
+        
+        if (*separator != '=')
+        {
+            pData->tags[move(tagKey)]; // just insert key with default (= empty string) value
+            continue;
+        }
+
+        separator = strpbrk(tags, "; ");
+        std::string tagValue(tags, separator - tags);
+        unescape_tag_string(tagValue);
+        tags = separator + 1;
+
+        pData->tags[move(tagKey)] = move(tagValue);
     }
 
     return ircMessageStart;
@@ -331,4 +343,32 @@ void irc_client::event_message(irc_message_data* pData)
 {
     channelContext_.process_message(pData);
 }
+
+void irc_client::unescape_tag_string(std::string& ts)
+{
+    std::string unescaped;
+    unescaped.reserve(ts.length());
+    size_t lastPos = 0;
+    size_t pos;
+    const char* sequence;
+
+    while (lastPos < ts.length() && (pos = ts.find('\\', lastPos)) != std::string::npos)
+    {
+        unescaped.append(&ts[lastPos], pos - lastPos);
+        sequence = &ts[pos];
+
+        if (strncmp(sequence, "\\:", 2) == 0) unescaped.push_back(';');
+        else if (strncmp(sequence, "\\s", 2) == 0) unescaped.push_back(' ');
+        else if (strncmp(sequence, "\\\\", 2) == 0) unescaped.push_back('\\');
+        else if (strncmp(sequence, "\\r", 2) == 0) unescaped.push_back('\r');
+        else if (strncmp(sequence, "\\n", 2) == 0) unescaped.push_back('\n');
+
+        lastPos = pos + 2;
+    }
+
+    if (lastPos < ts.length()) unescaped.append(ts.substr(lastPos));
+
+    ts.swap(unescaped);
+}
+
 }

@@ -26,6 +26,8 @@ private:
     void                event_ping(irc_message_data* pData);
     void                event_error(irc_message_data* pData);
     void                event_message(irc_message_data* pData);
+
+    static void         unescape_tag_string(std::string& ts);
 private:
     channel_context&    channelContext_;
 };
