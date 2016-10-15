@@ -69,5 +69,41 @@ int get_channel_subscribers(const char* pChannel, int limit, int offset, sub_man
     return added;
 }
 
+void get_channel_chatters(const char* pChannel, std::vector<std::string>& names)
+{
+    static constexpr char URL_FORMAT[] = "https://tmi.twitch.tv/group/user/%s/chatters";
+    char url[128];
+    int written = snprintf(url, array_size(url), URL_FORMAT, pChannel);
+
+    if (written < 0 || written >= array_size(url))
+    {
+        AshBotLogFatal << "Viewer API endpoint url overflow (channel: " << pChannel << ")";
+        return;
+    }
+
+    http_client client;
+    http_response response = client.send_request(url, true);
+
+    if (response.has_error())
+    {
+        AshBotLogError << "Failed to get list of channel viewers (channel: " << pChannel
+                       << "), status code " << response.status_code();
+        return;
+    }
+
+    jc::json viewersObject = jc::json::parse(response.data());
+
+    size_t chatterCount = viewersObject["chatter_count"].as_uinteger();
+    names.reserve(chatterCount);
+
+    for (auto chatterCategory : viewersObject["chatters"].members())
+    {
+        for (auto chatter : chatterCategory.value().elements())
+        {
+            names.push_back(chatter.as_string());
+        }
+    }
+}
+
 }
 }
