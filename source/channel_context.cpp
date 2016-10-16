@@ -1,5 +1,5 @@
 #include "channel_context.h"
-#include "irc/irc_client.h"
+#include "irc/twitch_irc_client.h"
 #include "commands/fun_commands.h"
 #include "modules/bot_module.h"
 

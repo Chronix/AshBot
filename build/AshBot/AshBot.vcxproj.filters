@@ -102,6 +102,9 @@
     <ClCompile Include="..\..\source\twitch_api.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\irc\twitch_irc_client.cpp">
+      <Filter>Source Files\irc</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\logging.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="..\..\include\ashbot.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\irc\twitch_irc_client.h">
+      <Filter>Header Files\irc</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

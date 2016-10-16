@@ -16,7 +16,7 @@ namespace bs = boost::system;
 
 using namespace commands;
 
-class irc_client;
+class twitch_irc_client;
 enum class send_type;
 
 namespace modules {
@@ -35,7 +35,7 @@ public:
                             ~channel_context();
 public:
     void                    stop();
-    void                    set_irc_client(irc_client* pClient) { pClient_ = pClient; }
+    void                    set_irc_client(twitch_irc_client* pClient) { pClient_ = pClient; }
 
     void                    register_commands();
 
@@ -58,7 +58,7 @@ private:
 private:
     baio::deadline_timer    secondTimer_;
 
-    irc_client*             pClient_;
+    twitch_irc_client*      pClient_;
     command_factory         commandFactory_;
 
     cooldown_map            cooldownMap_;

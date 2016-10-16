@@ -2,6 +2,8 @@
 
 namespace ashbot {
     
+// don't just arbitrarily change order of these
+// or you will break message dispatch inside twitch_irc_client
 enum class receive_type
 {
     info,
@@ -27,7 +29,6 @@ enum class receive_type
     channel_mode_change,
     channel_message,
     channel_action,
-    channel_notice,
     query_message,
     query_action,
     query_notice,
@@ -37,6 +38,16 @@ enum class receive_type
     error_message,
     ping,
     cap_ack,
+
+    channel_notice,
+    // twitch specific receive types
+    hosttarget,
+    clearchat,
+    userstate,
+    reconnect,
+    roomstate,
+    usernotice,
+
     unknown
 };
 

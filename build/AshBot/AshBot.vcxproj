@@ -102,6 +102,7 @@
     <ClCompile Include="..\..\source\http_client.cpp" />
     <ClCompile Include="..\..\source\irc\irc_client.cpp" />
     <ClCompile Include="..\..\source\irc\irc_connection.cpp" />
+    <ClCompile Include="..\..\source\irc\twitch_irc_client.cpp" />
     <ClCompile Include="..\..\source\logging.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\modules\bot_module.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="..\..\include\irc\irc_enums.h" />
     <ClInclude Include="..\..\include\irc\irc_message_data.h" />
     <ClInclude Include="..\..\include\irc\rfc2812.h" />
+    <ClInclude Include="..\..\include\irc\twitch_irc_client.h" />
     <ClInclude Include="..\..\include\logging.h" />
     <ClInclude Include="..\..\include\modules\bot_module.h" />
     <ClInclude Include="..\..\include\modules\songrequest\song.h" />

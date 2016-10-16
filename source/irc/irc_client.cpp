@@ -229,7 +229,7 @@ const char* irc_client::parse_tags(irc_message_data* pData, const char* pLine) c
     return ircMessageStart;
 }
 
-receive_type irc_client::get_message_type(const char* pRawLine, reply_code& pRc) const
+receive_type irc_client::get_message_type(const char* pRawLine, reply_code& rc) const
 {
     bx::cmatch match;
 
@@ -245,8 +245,7 @@ receive_type irc_client::get_message_type(const char* pRawLine, reply_code& pRc)
             return receive_type::unknown;
         }
 
-        reply_code rc = static_cast<reply_code>(code);
-        pRc = rc;
+        rc = static_cast<reply_code>(code);
 
         if (code >= 400 && code <= 599) return receive_type::error_message;
         auto rtIter = ReceiveTypeMap.find(rc);
@@ -254,7 +253,7 @@ receive_type irc_client::get_message_type(const char* pRawLine, reply_code& pRc)
         return receive_type::unknown;
     }
 
-    pRc = reply_code::null;
+    rc = reply_code::null;
 
     if (regex_match(pRawLine, match, regex::Message))
     {
@@ -322,6 +321,7 @@ void irc_client::dispatch_message(irc_message_data* pData)
     case receive_type::query_message:
         event_message(pData); 
         return; // return, not break
+    default: break; // shut up resharper
     }
 
     pData->release();

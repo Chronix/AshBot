@@ -1,6 +1,6 @@
 #pragma once
 
-#include "irc/irc_client.h"
+#include "irc/twitch_irc_client.h"
 #include "channel_context.h"
 
 namespace ashbot {
@@ -14,7 +14,7 @@ public:
     void                stop();
 private:
     channel_context     context_;
-    irc_client          client_;
+    twitch_irc_client   client_;
 };
 
 }
