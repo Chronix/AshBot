@@ -50,16 +50,21 @@ user_access_level channel_context::get_user_access_level(irc_message_data* pCont
     return user_access_level::pleb;
 }
 
-void channel_context::send_message(send_type type, const char* format, ...) const
+void channel_context::send_message(const char* format, bool action, ...) const
+{
+    va_list va;
+    va_start(va, action);
+    
+    vsend_message(format, va, action);
+
+    va_end(va);
+}
+
+void channel_context::vsend_message(const char* format, va_list va, bool action) const
 {
     char* pBuffer = get_string();
-    
-    va_list va;
-    va_start(va, format);
     vsnprintf(pBuffer, ASHBOT_STRING_BUFFER_SIZE, format, va);
-    va_end(va);
-
-    pClient_->send_message(type, channel_, pBuffer);
+    pClient_->send_message(action ? send_type::action : send_type::message, channel_, pBuffer);
     release_string(pBuffer);
 }
 

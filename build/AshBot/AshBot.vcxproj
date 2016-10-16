@@ -130,6 +130,7 @@
     <ClInclude Include="..\..\include\commands\command_traits.h" />
     <ClInclude Include="..\..\include\commands\fun_commands.h" />
     <ClInclude Include="..\..\include\concurrent_queue.h" />
+    <ClInclude Include="..\..\include\context_object.h" />
     <ClInclude Include="..\..\include\db\db.h" />
     <ClInclude Include="..\..\include\db\db_debug_data.h" />
     <ClInclude Include="..\..\include\db_types.h" />

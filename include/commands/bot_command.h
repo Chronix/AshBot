@@ -5,6 +5,7 @@
 
 #include "irc/irc_message_data.h"
 #include "command_id.h"
+#include "context_object.h"
 #include "access_level.h"
 #include "string_pool.h"
 
@@ -16,7 +17,7 @@ namespace commands {
 
 using command_clock = std::chrono::steady_clock;
 
-class bot_command_base
+class bot_command_base : public context_object<channel_context*>
 {
     friend class channel_context;
 public:
@@ -35,7 +36,6 @@ protected:
     bool                        accessible_by(user_access_level level) const;
 protected:
     command_id                  id_;
-    channel_context*            pContext_;
     char                        user_[irc_message_data::MAX_USERNAME_LENGTH];
     user_access_level           requiredAccess_;
     command_clock::duration     cooldown_;
@@ -46,8 +46,8 @@ protected:
 inline bot_command_base::bot_command_base(command_id id, size_t cooldown,
                                           user_access_level requiredAccess,
                                           bool restrictMods, bool offlineOnly)
-    :   id_(id),
-        pContext_(nullptr),
+    :   context_object(nullptr),
+        id_(id),
         requiredAccess_(requiredAccess),
         cooldown_(std::chrono::seconds(cooldown)),
         restrictMods_(restrictMods),
@@ -89,7 +89,7 @@ bot_command<_Traits>::bot_command()
 template <typename _Traits>
 void bot_command<_Traits>::set_params(channel_context* pContext, const char* pUser)
 {
-    pContext_ = pContext;
+    context_ = pContext;
     strcpy(user_, pUser);
 }
 

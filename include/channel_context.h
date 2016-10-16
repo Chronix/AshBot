@@ -29,7 +29,7 @@ class channel_context
 {
     using cooldown_map = boost::container::flat_map<command_id, command_clock::time_point>;
 public:
-    static const char       command_prefix = '!';
+    static constexpr char   command_prefix = '!';
 public:
     explicit                channel_context(const char* pChannel, int threadCount = 8);
                             ~channel_context();
@@ -43,7 +43,8 @@ public:
 
     user_access_level       get_user_access_level(irc_message_data* pContext) const;
 
-    void                    send_message(send_type type, const char* format, ...) const;
+    void                    send_message(const char* format, bool action, ...) const;
+    void                    vsend_message(const char* format, va_list va, bool action = false) const;
 
     template<typename _Function>
     void                    execute_async(_Function&& fn);

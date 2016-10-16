@@ -3,8 +3,9 @@
 #include <atomic>
 #include <memory>
 #include <string>
-#include <vector>
+#include <type_traits>
 #include <unordered_set>
+#include <vector>
 
 #include <boost/asio.hpp>
 #include <boost/assign/list_of.hpp>

@@ -6,6 +6,7 @@ namespace modules {
 
 timed_module::timed_module(channel_context& cc, int timerIntervalSeconds, bool asyncTimerHandler)
     :   bot_module(cc),
+        timerHitCount_(0),
         timerIntervalSeconds_(timerIntervalSeconds),
         asyncTimerHandler_(asyncTimerHandler)
 {

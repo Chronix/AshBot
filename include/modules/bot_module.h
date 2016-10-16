@@ -1,5 +1,6 @@
 #pragma once
 
+#include "context_object.h"
 #include "mutex.h"
 
 namespace ashbot {
@@ -9,15 +10,14 @@ class channel_context;
 
 namespace modules {
 
-class bot_module
+class bot_module : public context_object<channel_context&>
 {
 public:
-    explicit            bot_module(channel_context& cc) : context_(cc) {}
+    explicit            bot_module(channel_context& cc) : context_object(cc) {}
     virtual             ~bot_module() {}
 public:
     virtual bool        process_message(irc_message_data* pData) { return true; }
 protected:
-    channel_context&    context_;
     mutex               mutex_;
 };
 

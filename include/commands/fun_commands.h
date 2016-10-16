@@ -20,7 +20,7 @@ class hello_command : public bot_command<traits::hello_command_traits>
 public:
     void execute() override
     {
-        pContext_->send_message(send_type::message, "Hello %s", user_);
+        send_message("Hello %s", false, user_);
     }
 };
 }

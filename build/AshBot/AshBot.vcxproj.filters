@@ -218,5 +218,8 @@
     <ClInclude Include="..\..\include\irc\twitch_irc_client.h">
       <Filter>Header Files\irc</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\context_object.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
