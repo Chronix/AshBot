@@ -102,7 +102,7 @@ private:
                             db();
 public:
     template<typename... _Args>
-    db_result               query(const char* commandText, _Args&... args);
+    db_result               query(const char* commandText, _Args&&... args);
 
     static const char*      strptr(const char* ps) { return ps; }
 
@@ -290,7 +290,7 @@ struct fill_params
 };
 
 template<typename... _Args>
-db_result query(PGconn* pc, const char* commandText, _Args&... args)
+db_result query(PGconn* pc, const char* commandText, _Args&&... args)
 {
     constexpr size_t ArgCount = sizeof...(args);
     bf::vector<_Args...> params(args...);
@@ -332,10 +332,10 @@ inline db_result query(PGconn* pc, const char* commandText)
 }
 
 template<typename... _Args>
-db_result db::query(const char* commandText, _Args&... args)
+db_result db::query(const char* commandText, _Args&&... args)
 {
     PGconn* pc = get_connection();
-    db_result dbRes = detail::query(pc, commandText, args...);
+    db_result dbRes = detail::query(pc, commandText, std::forward<_Args>(args)...);
     release_connection(pc);
     return dbRes;
 }
