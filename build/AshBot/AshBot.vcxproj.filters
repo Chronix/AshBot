@@ -105,6 +105,12 @@
     <ClCompile Include="..\..\source\irc\twitch_irc_client.cpp">
       <Filter>Source Files\irc</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\modules\songrequest\soundcloud_api.cpp">
+      <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\modules\songrequest\vimeo_api.cpp">
+      <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\logging.h">
@@ -220,6 +226,12 @@
     </ClInclude>
     <ClInclude Include="..\..\include\context_object.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\soundcloud_api.h">
+      <Filter>Header Files\modules\songrequest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\modules\songrequest\vimeo_api.h">
+      <Filter>Header Files\modules\songrequest</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

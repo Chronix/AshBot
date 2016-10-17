@@ -10,9 +10,8 @@ namespace songrequest {
 
 namespace bx = boost::xpressive;
 
-class song
+struct song
 {
-    friend class youtube;
 public:
     enum class error
     {
@@ -34,24 +33,24 @@ public:
                             song();
 public:
     void                    parse_link(const char* pLink);
-
-    const char*             track_id() const { return trackId_; }
+    void                    parse_iso8601_created_date(const std::string& stringRep);
 private:
     bool                    try_process_youtube_link(const char* pLink);
     bool                    try_process_soundcloud_link(const char* pLink);
     bool                    try_process_vimeo_link(const char* pLink);
     void                    process_youtube_id(const char* pLink);
-private:
-    int64_t                 id_;
-    char                    name_[512];
-    std::string             link_;
-    char                    trackId_[64];
-    source                  source_;
-    song_duration           length_;
-    bool                    banned_;
-    bool                    banOnRequest_;
-    error                   error_;
-    clock_type::time_point  createdAt_;
+public:
+    int64_t                 Id;
+    std::string             Name;
+    std::string             Link;
+    std::string             TrackId;
+    source                  Source;
+    duration                Length;
+    bool                    Banned;
+    bool                    BanOnRequest;
+    duration                BanLength;
+    error                   Error;
+    clock_type::time_point  CreatedAt;
 };
 
 }

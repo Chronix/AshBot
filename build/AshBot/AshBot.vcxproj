@@ -108,6 +108,8 @@
     <ClCompile Include="..\..\source\modules\bot_module.cpp" />
     <ClCompile Include="..\..\source\modules\songrequest\song.cpp" />
     <ClCompile Include="..\..\source\modules\songrequest\songrequest_provider.cpp" />
+    <ClCompile Include="..\..\source\modules\songrequest\soundcloud_api.cpp" />
+    <ClCompile Include="..\..\source\modules\songrequest\vimeo_api.cpp" />
     <ClCompile Include="..\..\source\modules\songrequest\youtube_api.cpp" />
     <ClCompile Include="..\..\source\pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -147,6 +149,8 @@
     <ClInclude Include="..\..\include\modules\songrequest\song.h" />
     <ClInclude Include="..\..\include\modules\songrequest\songrequest.h" />
     <ClInclude Include="..\..\include\modules\songrequest\songrequest_provider.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\soundcloud_api.h" />
+    <ClInclude Include="..\..\include\modules\songrequest\vimeo_api.h" />
     <ClInclude Include="..\..\include\modules\songrequest\youtube_api.h" />
     <ClInclude Include="..\..\include\mutex.h" />
     <ClInclude Include="..\..\include\object_cache.h" />

@@ -38,22 +38,27 @@ void http_client::add_header(const char* name, const char* value)
     curlHeaders_ = curl_slist_append(curlHeaders_, header.c_str());
 }
 
-http_response http_client::send_request(const char* url, bool https)
+http_response http_client::send_request(const char* url, bool https, bool followRedirects)
 {
     http_response response;
 
-    build_request(response, url, https);
+    build_request(response, url, https, followRedirects);
 
     CURLcode retCode = curl_easy_perform(hCurl_);
     if (retCode != CURLE_OK) response.error_ = true;
 
     curl_easy_getinfo(hCurl_, CURLINFO_RESPONSE_CODE, &response.statusCode_);
+
+    char* redirectUrl = nullptr;
+    curl_easy_getinfo(hCurl_, CURLINFO_REDIRECT_URL, &redirectUrl);
+    if (redirectUrl) response.redirectUrl_.assign(redirectUrl);
+
     curl_easy_reset(hCurl_);
 
     return response;
 }
 
-void http_client::build_request(http_response& res, const char* url, bool https)
+void http_client::build_request(http_response& res, const char* url, bool https, bool followRedirects)
 {
     curl_easy_setopt(hCurl_, CURLOPT_URL, url);
     
@@ -63,6 +68,8 @@ void http_client::build_request(http_response& res, const char* url, bool https)
         curl_easy_setopt(hCurl_, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
     }
     
+    if (!followRedirects) curl_easy_setopt(hCurl_, CURLOPT_FOLLOWLOCATION, 0);
+
     curl_easy_setopt(hCurl_, CURLOPT_WRITEFUNCTION, curl_write);
     curl_easy_setopt(hCurl_, CURLOPT_WRITEDATA, &res.data_);
 
@@ -81,7 +88,8 @@ void twitch_http_client::add_twitch_auth_headers()
 
     add_twitch_std_headers();
     char auth[128] = ASHBOT_OAUTH;
-    strncat(auth, tokens::twitch_user(), array_size(auth) - static_strlen<size_t>(ASHBOT_OAUTH));
+    strncat(auth, tokens::twitch_user(), array_size(auth) - array_size(ASHBOT_OAUTH));
+    // or (static_strlen() + 1), same thing                 ^^^^^^^^^^^
     add_header("Authorization", auth);
 }
 }
