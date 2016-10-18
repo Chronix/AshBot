@@ -84,6 +84,7 @@
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
       <EnableEnhancedInstructionSet>AdvancedVectorExtensions2</EnableEnhancedInstructionSet>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -125,6 +126,7 @@
     <ClInclude Include="..\..\include\ashbot.h" />
     <ClInclude Include="..\..\include\blocking_queue.h" />
     <ClInclude Include="..\..\include\bot.h" />
+    <ClInclude Include="..\..\include\byteorder.h" />
     <ClInclude Include="..\..\include\channel_context.h" />
     <ClInclude Include="..\..\include\commands\bot_command.h" />
     <ClInclude Include="..\..\include\commands\command_factory.h" />

@@ -6,6 +6,10 @@
 
 // hence this
 
+#include <boost/noncopyable.hpp>
+#include <boost/thread/locks.hpp>
+#include <boost/thread/recursive_mutex.hpp>
+
 namespace ashbot {
     
 #ifdef WIN32

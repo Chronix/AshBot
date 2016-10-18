@@ -3631,3 +3631,15 @@ inline void swap(typename ConcurrentQueue<T, Traits>::ImplicitProducerKVP& a, ty
 #if defined(__GNUC__)
 #pragma GCC diagnostic pop
 #endif
+
+#include "blocking_queue.h"
+
+namespace ashbot {
+
+template<typename T>
+using cc_queue = moodycamel::ConcurrentQueue<T>;
+
+template<typename T>
+using blocking_queue = moodycamel::BlockingConcurrentQueue<T>;
+
+}

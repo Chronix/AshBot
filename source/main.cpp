@@ -3,7 +3,7 @@
 #include <curl/curl.h>
 
 #include "bot.h"
-
+#include "logging.h"
 #include "sub_manager.h"
 #include "thread_pool.h"
 #include "tokens.h"

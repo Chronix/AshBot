@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct curl_slist;
 
 namespace ashbot {

@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "mutex.h"
+#include "concurrent_queue.h"
 
 namespace ashbot {
 

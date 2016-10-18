@@ -233,5 +233,8 @@
     <ClInclude Include="..\..\include\modules\songrequest\vimeo_api.h">
       <Filter>Header Files\modules\songrequest</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\byteorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

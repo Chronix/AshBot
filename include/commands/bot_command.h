@@ -19,7 +19,7 @@ using command_clock = std::chrono::steady_clock;
 
 class bot_command_base : public context_object<channel_context*>
 {
-    friend class channel_context;
+    friend channel_context;
 public:
     virtual                     ~bot_command_base() {}
 protected:
@@ -183,7 +183,7 @@ void bot_command_with_args_and_message<_Traits>::set_message(char* pMessage)
     ++pActualMessage;
 
     strcpy(pMessage, pActualMessage);
-    set_message_core(pActualMessage);
+    this->set_message_core(pActualMessage); // clang doesn't like this without 'this->'
 }
 }
 }

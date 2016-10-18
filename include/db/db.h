@@ -6,7 +6,9 @@
 
 #include <libpq/libpq-fe.h>
 
+#include "byteorder.h"
 #include "db_types.h"
+#include "logging.h"
 #include "string_pool.h"
 
 #define ASHBOT_PARAM_BUF_LEN    32

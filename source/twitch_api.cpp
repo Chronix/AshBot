@@ -1,5 +1,8 @@
+#include <jsoncons/json.hpp>
+
 #include "twitch_api.h"
 #include "http_client.h"
+#include "logging.h"
 #include "util.h"
 
 namespace ashbot {
