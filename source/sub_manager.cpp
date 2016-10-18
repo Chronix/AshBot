@@ -72,7 +72,7 @@ void add_sub(const char* pName)
     }
 
     db::user_id userId = db::get().get_user(pName);
-    db_result rSub = db::get().query(SQL_SET_SUB, pName);
+    db_result rSub = db::get().query(SQL_SET_SUB, userId);
     if (!rSub)
     {
         AshBotLogError << "Failed to upgrade user " << pName << " to sub status [" << rSub.error_message() << "]";
