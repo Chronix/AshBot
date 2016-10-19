@@ -46,14 +46,14 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(SolutionDir)..\websocketpp;$(SolutionDir)..;$(Path);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(Path);$(IncludePath)</IncludePath>
     <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(SolutionDir)..\websocketpp;$(SolutionDir)..;$(Path);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(Path);$(IncludePath)</IncludePath>
     <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
