@@ -46,14 +46,14 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(Path);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(SolutionDir)..\websocketpp;$(SolutionDir)..;$(Path);$(IncludePath)</IncludePath>
     <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(Path);$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\jsoncons\src;$(SolutionDir)..\websocketpp;$(SolutionDir)..;$(Path);$(IncludePath)</IncludePath>
     <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -61,7 +61,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;_WEBSOCKETPP_CPP11_STRICT_;_WEBSOCKETPP_NO_CPP11_THREAD_;_WEBSOCKETPP_NO_CPP11_SYSTEM_ERROR_;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/favor:INTEL64 /std:c++14 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
@@ -69,7 +69,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -79,7 +79,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32_LEAN_AND_MEAN;NTDDI_VERSION=0x06030000;_WIN32_WINNT=0x0602;WINVER=0x0602;STRICT;NOMINMAX;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS;BOOST_THREAD_VERSION=4;JSONCONS_NO_DEPRECATED;_WEBSOCKETPP_CPP11_STRICT_;_WEBSOCKETPP_NO_CPP11_THREAD_;_WEBSOCKETPP_NO_CPP11_SYSTEM_ERROR_;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalOptions>/favor:INTEL64 /std:c++14 %(AdditionalOptions)</AdditionalOptions>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>pch.h</ForcedIncludeFiles>
@@ -91,7 +91,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>ws2_32.lib;libpq.lib;libcurl.lib;libeay32.lib;ssleay32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -124,16 +124,15 @@
   <ItemGroup>
     <ClInclude Include="..\..\include\access_level.h" />
     <ClInclude Include="..\..\include\ashbot.h" />
-    <ClInclude Include="..\..\include\blocking_queue.h" />
     <ClInclude Include="..\..\include\bot.h" />
     <ClInclude Include="..\..\include\byteorder.h" />
+    <ClInclude Include="..\..\include\cc_queue.h" />
     <ClInclude Include="..\..\include\channel_context.h" />
     <ClInclude Include="..\..\include\commands\bot_command.h" />
     <ClInclude Include="..\..\include\commands\command_factory.h" />
     <ClInclude Include="..\..\include\commands\command_id.h" />
     <ClInclude Include="..\..\include\commands\command_traits.h" />
     <ClInclude Include="..\..\include\commands\fun_commands.h" />
-    <ClInclude Include="..\..\include\concurrent_queue.h" />
     <ClInclude Include="..\..\include\context_object.h" />
     <ClInclude Include="..\..\include\db\db.h" />
     <ClInclude Include="..\..\include\db\db_debug_data.h" />
@@ -163,6 +162,7 @@
     <ClInclude Include="..\..\include\tokens.h" />
     <ClInclude Include="..\..\include\twitch_api.h" />
     <ClInclude Include="..\..\include\util.h" />
+    <ClInclude Include="..\..\include\websocketpp.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

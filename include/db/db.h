@@ -7,6 +7,7 @@
 #include <libpq/libpq-fe.h>
 
 #include "byteorder.h"
+#include "cc_queue.h"
 #include "db_types.h"
 #include "logging.h"
 #include "string_pool.h"

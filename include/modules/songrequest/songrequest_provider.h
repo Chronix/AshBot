@@ -4,6 +4,7 @@
 #include <boost/container/static_vector.hpp>
 #include <boost/variant/variant.hpp>
 
+#include "cc_queue.h"
 #include "modules/bot_module.h"
 #include "songrequest.h"
 

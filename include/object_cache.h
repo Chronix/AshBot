@@ -2,8 +2,8 @@
 
 #include <vector>
 
+#include "cc_queue.h"
 #include "mutex.h"
-#include "concurrent_queue.h"
 
 namespace ashbot {
 

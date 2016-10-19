@@ -19,12 +19,6 @@
 #include <jsoncons/json.hpp>
 #include <jsoncons_ext/jsonpath/json_query.hpp>
 
+#include "cc_queue.h"
 #include "logging.h"
-#include "concurrent_queue.h"
-#include "blocking_queue.h"
-
-template<typename T>
-using cc_queue = moodycamel::ConcurrentQueue<T>;
-
-template<typename T>
-using blocking_queue = moodycamel::BlockingConcurrentQueue<T>;
+#include "websocketpp.h"

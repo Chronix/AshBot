@@ -146,9 +146,6 @@
     <ClInclude Include="..\..\include\irc\irc_debug_data.h">
       <Filter>Header Files\irc</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\concurrent_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\mutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -209,9 +206,6 @@
     <ClInclude Include="..\..\include\thread_pool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\include\blocking_queue.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\include\sub_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -234,6 +228,12 @@
       <Filter>Header Files\modules\songrequest</Filter>
     </ClInclude>
     <ClInclude Include="..\..\include\byteorder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\websocketpp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\cc_queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
