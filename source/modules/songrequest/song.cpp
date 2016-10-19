@@ -30,11 +30,12 @@ const bx::cregex VimeoId = +bx::_d >> bx::eos;
 }
 
 song::song()
-    :   Id(-1),
-        Source(source::youtube),
-        Banned(false),
-        BanOnRequest(false),
-        Error(error::none)
+    :   Id(-1)
+    ,   Source(source::youtube)
+    ,   Banned(false)
+    ,   BanOnRequest(false)
+    ,   BanLength(0)
+    ,   Error(error::none)
 {
 }
 

@@ -46,12 +46,12 @@ protected:
 inline bot_command_base::bot_command_base(command_id id, size_t cooldown,
                                           user_access_level requiredAccess,
                                           bool restrictMods, bool offlineOnly)
-    :   context_object(nullptr),
-        id_(id),
-        requiredAccess_(requiredAccess),
-        cooldown_(std::chrono::seconds(cooldown)),
-        restrictMods_(restrictMods),
-        offlineOnly_(offlineOnly)
+    :   context_object(nullptr)
+    ,   id_(id)
+    ,   requiredAccess_(requiredAccess)
+    ,   cooldown_(std::chrono::seconds(cooldown))
+    ,   restrictMods_(restrictMods)
+    ,   offlineOnly_(offlineOnly)
 {
     user_[0] = 0;
 }

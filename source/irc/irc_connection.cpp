@@ -17,13 +17,13 @@ const std::string IRC_DELIMITER("\r\n");
 namespace ph = baio::placeholders;
 
 irc_connection::irc_connection()
-    :   socket_(tp_get_ioservice()),
-        connected_(false),
-        registered_(false),
-        pingTimeout_(300),
-        pingInterval_(150),
-        pingTimer_(tp_get_ioservice(), boost::posix_time::seconds(pingInterval_)),
-        pingLineLength_(0)
+    :   socket_(tp_get_ioservice())
+    ,   connected_(false)
+    ,   registered_(false)
+    ,   pingTimeout_(300)
+    ,   pingInterval_(150)
+    ,   pingTimer_(tp_get_ioservice(), boost::posix_time::seconds(pingInterval_))
+    ,   pingLineLength_(0)
 {
     time_point now = clock_type::now();
     lastPingSent_ = now;

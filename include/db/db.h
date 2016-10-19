@@ -27,8 +27,8 @@ class db_result
     using pgresult_ptr = std::shared_ptr<PGresult>;
 public:
     db_result(PGresult* pRes = nullptr)
-        :   pRes_(create_result_ptr(pRes)),
-            rowCount_(pRes ? PQntuples(pRes) : 0)
+        :   pRes_(create_result_ptr(pRes))
+        ,   rowCount_(pRes ? PQntuples(pRes) : 0)
     {}
 
     bool                    is_ok() const

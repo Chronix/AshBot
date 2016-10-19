@@ -33,14 +33,14 @@ namespace modules {
 namespace songrequest {
 
 songrequest_provider::songrequest_provider(channel_context& cc)
-    :   bot_module(cc),
-        enabled_(false),
-        subOnly_(false),
-        queueCapacity_(40),
-        songsPerPleb_(2),
-        songsPerRegular_(3),
-        songsPerSub_(5),
-        songsPerMod_(5)
+    :   bot_module(cc)
+    ,   enabled_(false)
+    ,   subOnly_(false)
+    ,   queueCapacity_(40)
+    ,   songsPerPleb_(2)
+    ,   songsPerRegular_(3)
+    ,   songsPerSub_(5)
+    ,   songsPerMod_(5)
 {
 }
 

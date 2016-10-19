@@ -19,8 +19,8 @@ size_t curl_write(char* buffer, size_t size, size_t nmemb, void* userdata)
 }
 
 http_client::http_client()
-    :   hCurl_(curl_easy_init()),
-        curlHeaders_(nullptr)
+    :   hCurl_(curl_easy_init())
+    ,   curlHeaders_(nullptr)
 {
 }
 

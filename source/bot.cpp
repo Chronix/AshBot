@@ -4,8 +4,8 @@
 namespace ashbot {
 
 bot::bot()
-    :   context_(IRC_CHANNEL),
-        client_(context_)
+    :   context_(IRC_CHANNEL)
+    ,   client_(context_)
 {
     context_.set_irc_client(&client_);
     context_.register_commands();

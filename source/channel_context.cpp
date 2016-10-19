@@ -15,9 +15,9 @@ const boost::posix_time::seconds OneSecond(1);
 }
 
 channel_context::channel_context(const char* pChannel, int threadCount)
-    :   secondTimer_(tp_get_ioservice(), OneSecond),
-        pClient_(nullptr),
-        ignorePlebs_(false)
+    :   secondTimer_(tp_get_ioservice(), OneSecond)
+    ,   pClient_(nullptr)
+    ,   ignorePlebs_(false)
 {
     strcpy(channel_, pChannel);
     secondTimer_.async_wait([this](const bs::error_code& ec) {second_timer_elapsed(ec); });
