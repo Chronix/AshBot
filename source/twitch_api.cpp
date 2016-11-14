@@ -38,7 +38,7 @@ int get_channel_subscribers(const char* pChannel, int limit, int offset, sub_man
 
     jc::json subsObject = jc::json::parse(response.data());
     auto total = subsObject.find("_total");
-    if (total == subsObject.members().end() || total->value().as_integer() == 0)
+    if (total == subsObject.object_range().end() || total->value().as_integer() == 0)
     {
         AshBotLogWarn << "Twitch API reports 0 subscribers for channel " << pChannel;
         return true;
@@ -54,7 +54,7 @@ int get_channel_subscribers(const char* pChannel, int limit, int offset, sub_man
 
     int added = 0;
 
-    for (auto& subObject : subsArray.elements())
+    for (auto& subObject : subsArray.array_range())
     {
         try
         {
@@ -99,9 +99,9 @@ void get_channel_chatters(const char* pChannel, std::vector<std::string>& names)
     size_t chatterCount = viewersObject["chatter_count"].as_uinteger();
     names.reserve(chatterCount);
 
-    for (auto chatterCategory : viewersObject["chatters"].members())
+    for (auto chatterCategory : viewersObject["chatters"].object_range())
     {
-        for (auto chatter : chatterCategory.value().elements())
+        for (auto chatter : chatterCategory.value().array_range())
         {
             names.push_back(chatter.as_string());
         }

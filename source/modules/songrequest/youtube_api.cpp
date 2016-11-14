@@ -102,12 +102,12 @@ bool youtube::parse_json(std::string& json, song& songData, const char* streamer
     songData.Length = parse_duration(contentDetails["duration"].as_string().c_str());
 
     auto regionRestriction = contentDetails.find("regionRestriction");
-    if (regionRestriction != contentDetails.members().end())
+    if (regionRestriction != contentDetails.object_range().end())
     {
         const jc::json& rr = regionRestriction->value();
 
         auto allowed = rr.find("allowed");
-        if (allowed != contentDetails.members().end())
+        if (allowed != contentDetails.object_range().end())
         {
             if (!contains_value(allowed->value().array_value(), streamerCountry))
             {
@@ -117,7 +117,7 @@ bool youtube::parse_json(std::string& json, song& songData, const char* streamer
         }
 
         auto blocked = rr.find("blocked");
-        if (blocked != contentDetails.members().end())
+        if (blocked != contentDetails.object_range().end())
         {
             if (contains_value(blocked->value().array_value(), streamerCountry))
             {
