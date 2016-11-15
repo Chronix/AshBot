@@ -95,7 +95,7 @@ bool is_sub(const char* pName)
         return false;
     }
 
-    return !rSub.is_field_null(0, 0);
+    return rSub.row_count() > 0 && !rSub.is_field_null(0, 0);
 }
 
 bool was_sub(const char* pName)
@@ -109,7 +109,7 @@ bool was_sub(const char* pName)
         return false;
     }
 
-    return !rSub.is_field_null(0, 0);
+    return rSub.row_count() > 0 && !rSub.is_field_null(0, 0);
 }
 
 bool is_regular(const char* pName, bool alsoSubRegular)
@@ -124,7 +124,7 @@ bool is_regular(const char* pName, bool alsoSubRegular)
         return false;
     }
 
-    return !rReg.is_field_null(0, 0);
+    return rReg.row_count() > 0 && !rReg.is_field_null(0, 0);
 }
 
 int add_regular(const char* pName)
