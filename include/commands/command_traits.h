@@ -9,7 +9,7 @@ namespace commands {
 template<
     command_id _Id,
     user_access_level _AccessLevel,
-    size_t _CooldownSeconds,
+    size_t _CooldownSeconds = 0,
     bool _RestrictMods = false,
     bool _OfflineChatOnly = false
 >

@@ -98,6 +98,7 @@
     <ClCompile Include="..\..\source\bot.cpp" />
     <ClCompile Include="..\..\source\channel_context.cpp" />
     <ClCompile Include="..\..\source\commands\command_registration.cpp" />
+    <ClCompile Include="..\..\source\context_object.cpp" />
     <ClCompile Include="..\..\source\db\db.cpp" />
     <ClCompile Include="..\..\source\globals.cpp" />
     <ClCompile Include="..\..\source\http_client.cpp" />
@@ -116,6 +117,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="..\..\source\remote\control_server.cpp" />
     <ClCompile Include="..\..\source\sub_manager.cpp" />
     <ClCompile Include="..\..\source\thread_pool.cpp" />
     <ClCompile Include="..\..\source\tokens.cpp" />
@@ -133,6 +135,7 @@
     <ClInclude Include="..\..\include\commands\command_id.h" />
     <ClInclude Include="..\..\include\commands\command_traits.h" />
     <ClInclude Include="..\..\include\commands\fun_commands.h" />
+    <ClInclude Include="..\..\include\commands\songrequest_commands.h" />
     <ClInclude Include="..\..\include\context_object.h" />
     <ClInclude Include="..\..\include\db\db.h" />
     <ClInclude Include="..\..\include\db\db_debug_data.h" />
@@ -156,11 +159,14 @@
     <ClInclude Include="..\..\include\mutex.h" />
     <ClInclude Include="..\..\include\object_cache.h" />
     <ClInclude Include="..\..\include\pch.h" />
+    <ClInclude Include="..\..\include\ref_counted_object.h" />
+    <ClInclude Include="..\..\include\remote\control_server.h" />
     <ClInclude Include="..\..\include\string_pool.h" />
     <ClInclude Include="..\..\include\sub_manager.h" />
     <ClInclude Include="..\..\include\thread_pool.h" />
     <ClInclude Include="..\..\include\tokens.h" />
     <ClInclude Include="..\..\include\twitch_api.h" />
+    <ClInclude Include="..\..\include\twitch_user.h" />
     <ClInclude Include="..\..\include\util.h" />
     <ClInclude Include="..\..\include\websocketpp.h" />
   </ItemGroup>

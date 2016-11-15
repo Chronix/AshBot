@@ -1,28 +1,19 @@
 #pragma once
 
-#include <stdarg.h>
-
-#include <functional>
-
 namespace ashbot {
 
-template<typename _TCtx>
-class context_object
-{
-protected:
-    explicit context_object(_TCtx ctx) : context_(ctx) {}
-protected:
-    void    send_message(const char* format, bool action, ...)
-    {
-        static constexpr auto vsend_message = &std::remove_pointer_t<std::decay_t<_TCtx>>::vsend_message;
+class channel_context;
 
-        va_list va;
-        va_start(va, format);
-        std::invoke(vsend_message, context_, format, va, action);
-        va_end(va);
-    }
+class context_object
+{  
 protected:
-    _TCtx   context_;
+    explicit context_object(channel_context* pCtx) : context_(pCtx) {}
+protected:
+    void                send_message(const char* format, bool action, ...) const;
+    channel_context*    context() const { return context_; }
+    void                set_context(channel_context* pcc) { context_ = pcc; }
+private:
+    channel_context*    context_;
 };
 
 #define AshBotSendMessage(format, ...) send_message(format, false, __VA_ARGS__)

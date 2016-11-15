@@ -76,6 +76,14 @@ public:
         return true;
     }
 
+    bool read_column(std::string& result, int row, int column) const
+    {
+        char buf[ASHBOT_STRING_BUFFER_SIZE];
+        bool success = read_column(buf, row, column);
+        if (success) result.assign(buf);
+        return success;
+    }
+
     bool is_field_null(int row, int column) const
     {
         return PQgetisnull(pRes_.get(), row, column);
@@ -292,11 +300,31 @@ struct fill_params
     int*                pLengths;
 };
 
+// the catch here is that if you pass a integral variable (or integral struct member) to query, it is
+// passed by reference, which means it will be mangled (converted to big endian) upon exiting
+// the function (see fill_params_core for integers)
+// hence we want to make sure integers are contained as values (not references) in our 
+// boost::fusion::vector, that way the function args (which are references) stay intact
+template<typename _T, typename = void>
+struct unref_integrals;
+
+template<typename _T>
+struct unref_integrals<_T, std::enable_if_t<std::is_integral<std::remove_reference_t<_T>>::value>>
+{
+    using type = std::remove_reference_t<_T>;
+};
+
+template<typename _T>
+struct unref_integrals<_T, std::enable_if_t<!std::is_integral<std::remove_reference_t<_T>>::value>>
+{
+    using type = _T;
+};
+
 template<typename... _Args>
 db_result query(PGconn* pc, const char* commandText, _Args&&... args)
 {
     constexpr size_t ArgCount = sizeof...(args);
-    bf::vector<_Args...> params(args...);
+    bf::vector<typename unref_integrals<_Args>::type...> params(std::forward<_Args>(args)...);
 
     const char* paramValues[ArgCount];
     int paramLengths[ArgCount], paramFormats[ArgCount];

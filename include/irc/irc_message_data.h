@@ -3,79 +3,83 @@
 #include <memory>
 
 #include <boost/container/flat_map.hpp>
-#include <boost/logic/tribool.hpp>
 
 #include "irc_enums.h"
 #include "object_cache.h"
 #include "string_pool.h"
+#include "twitch_user.h"
 
 namespace ashbot {
 
-class irc_client;
-    
-struct irc_message_data
+class irc_message_data final : public cached_object<irc_message_data>
 {
+    friend cache_type::alloc_type;
+    friend class irc_client;
+    friend class twitch_irc_client;
+
+    using base_type = cached_object<irc_message_data>;
     using tag_map = boost::container::flat_map<std::string, std::string>;
-    using bool3 = boost::logic::tribool;
-
-    // actual max is 25 characters
-    enum { MAX_USERNAME_LENGTH = 32 };
-
-    char            username[MAX_USERNAME_LENGTH];
-    char            message[ASHBOT_STRING_BUFFER_SIZE];
-    receive_type    receiveType;
-    reply_code      replyCode;
-    tag_map         tags;
-
-    bool3           isSub;
-    bool3           isMod;
-
-    bool is_mod()
+public:
+    using ptr = boost::intrusive_ptr<irc_message_data>;
+private:
+    irc_message_data() = default;
+    virtual ~irc_message_data() {}
+public:
+    static ptr create()
     {
-        if (indeterminate(isMod))
-        {
-            auto mod = tags.find("mod");
-            isMod = mod != tags.end() && mod->second == "1";
-        }
-
-        return isMod;
+        return ptr(get_ptr());
     }
 
-    bool is_sub()
+    twitch_user* user() const { return user_.get(); }
+    const char* username() const { return user_->username(); }
+    bool mod() const { return user_->mod(); }
+    bool sub() const { return user_->sub(); }
+    char* message() { return message_; }
+    receive_type get_receive_type() const { return receiveType_; }
+protected:
+    void release_impl(uint32_t newRef) override
     {
-        if (indeterminate(isSub))
+        if (newRef == 0)
         {
-            auto sub = tags.find("sub");
-            isSub = sub != tags.end() && sub->second == "1";
+            user_.reset();
+            tags_.clear();
         }
 
-        return isSub;
+        base_type::release_impl(newRef);
     }
+private:
+    void update_user(const char* pUsername, size_t usernameLen)
+    {
+        user_ = twitch_user::create();
 
-    static irc_message_data* get();
-    void            release();
+        auto it = tags_.find("mod");
+        bool mod = it != tags_.end() && it->second == "1";
+
+        it = tags_.find("sub");
+        bool sub = it != tags_.end() && it->second == "1";
+
+        it = tags_.find("display-name");
+        std::string displayName;
+        if (it != tags_.end()) displayName.swap(it->second);
+        // we can just take it             ^^^^^^^^^^^^^^^
+
+        user_->set(pUsername, usernameLen, move(displayName), mod, sub);
+    }
+private:
+    // this is a little derp in the design because we have
+    // "irc_client" and "twitch_irc_client" but not "irc_message_data"
+    // (with just "class user") and "twitch_irc_message_data"
+    // this means that irc_message_data is coupled with twitch
+    // even though it shouldn't
+    // maybe I should just remove irc_client
+
+    // twitch_user has to be ref-counted because commands/modules
+    // can hold it beyond the lifetime of its irc_message_data
+    twitch_user::ptr    user_;
+    char                message_[ASHBOT_STRING_BUFFER_SIZE];
+    receive_type        receiveType_;
+    reply_code          replyCode_;
+    tag_map             tags_;
 };
-
-using message_data_pool = object_cache<irc_message_data>;
-
-namespace globals {
-extern std::unique_ptr<message_data_pool> g_messageDataPool;
-}
-
-inline irc_message_data* irc_message_data::get()
-{
-    irc_message_data* pData = globals::g_messageDataPool->get_block();
-    return pData;
-}
-
-inline void irc_message_data::release()
-{
-    isMod = boost::logic::indeterminate;
-    isSub = boost::logic::indeterminate;
-    
-    tags.clear();
-
-    globals::g_messageDataPool->release_block(this);
-}
 
 }

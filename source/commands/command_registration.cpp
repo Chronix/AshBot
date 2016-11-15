@@ -1,4 +1,5 @@
 #include "commands/fun_commands.h"
+#include "commands/songrequest_commands.h"
 #include "channel_context.h"
 
 namespace ashbot {
@@ -11,6 +12,8 @@ void channel_context::register_commands()
 
     commandFactory_.register_command<hello_command>("hello");
 
+    commandFactory_.register_command<songrequest_command>("songrequest", "sr", "requestsong", "srq", "ohgodohgodohgod");
+    
     cooldownMap_.reserve(static_cast<size_t>(command_id::max_id));
     command_clock::time_point lastUse = command_clock::now() - std::chrono::hours(1);
     

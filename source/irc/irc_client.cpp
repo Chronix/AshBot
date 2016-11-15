@@ -140,9 +140,9 @@ void irc_client::send_message(send_type type, const char* pDestination, const ch
 
 void irc_client::ev_line_read(const char* pLine)
 {
-    irc_message_data* pData = irc_message_data::get();
-    parse_message(pData, pLine);
-    dispatch_message(pData);
+    irc_message_data::ptr data = irc_message_data::create();
+    parse_message(data.get(), pLine);
+    dispatch_message(data.get());
 }
 
 void irc_client::ev_logged_in()
@@ -188,16 +188,14 @@ void irc_client::parse_message(irc_message_data* pData, const char* pLine) const
             if (endPtr != pMessageCode) replyCode = static_cast<reply_code>(messageCode);
         }
     }
-
-    size_t nickLength = nickEnd - pRawLine;
-    assert(nickLength < (irc_message_data::MAX_USERNAME_LENGTH - 1));
-    memcpy(pData->username, pRawLine, nickLength);
-    pData->username[nickLength] = 0;
     
-    if (pMessage) strcpy(pData->message, pMessage);
+    size_t nickLength = nickEnd - pRawLine;
+    pData->update_user(pRawLine, nickLength);
+    
+    if (pMessage) strcpy(pData->message_, pMessage);
 
-    pData->replyCode = replyCode;
-    pData->receiveType = type;
+    pData->replyCode_ = replyCode;
+    pData->receiveType_ = type;
 }
 
 const char* irc_client::parse_tags(irc_message_data* pData, const char* pLine) const
@@ -214,7 +212,7 @@ const char* irc_client::parse_tags(irc_message_data* pData, const char* pLine) c
         
         if (*separator != '=')
         {
-            pData->tags[move(tagKey)]; // just insert key with default (= empty string) value
+            pData->tags_[move(tagKey)]; // just insert key with default (= empty string) value
             continue;
         }
 
@@ -223,7 +221,7 @@ const char* irc_client::parse_tags(irc_message_data* pData, const char* pLine) c
         unescape_tag_string(tagValue);
         tags = separator + 1;
 
-        pData->tags[move(tagKey)] = move(tagValue);
+        pData->tags_[move(tagKey)] = move(tagValue);
     }
 
     return ircMessageStart;
@@ -313,7 +311,7 @@ receive_type irc_client::get_message_type(const char* pRawLine, reply_code& rc) 
 
 void irc_client::dispatch_message(irc_message_data* pData)
 {
-    switch (pData->receiveType)
+    switch (pData->receiveType_)
     {
     case receive_type::ping: event_ping(pData); break;
     case receive_type::error: event_error(pData); break;
@@ -323,8 +321,6 @@ void irc_client::dispatch_message(irc_message_data* pData)
         return; // return, not break
     default: break; // shut up resharper
     }
-
-    pData->release();
 }
 
 void irc_client::event_ping(irc_message_data* pData)
@@ -336,7 +332,7 @@ void irc_client::event_ping(irc_message_data* pData)
 
 void irc_client::event_error(irc_message_data* pData)
 {
-    AshBotLogWarn << "IRC Error: " << pData->message;
+    AshBotLogWarn << "IRC Error: " << pData->message();
 }
 
 void irc_client::event_message(irc_message_data* pData)

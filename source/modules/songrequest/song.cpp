@@ -57,6 +57,20 @@ void song::parse_iso8601_created_date(const std::string& stringRep)
     CreatedAt = clock_type::from_time_t(mktime(&s_tm));
 }
 
+std::string song::get_standardized_link() const
+{
+    switch (Source)
+    {
+    case source::youtube:
+        return "https://www.youtube.com/watch?v=" + TrackId;
+    case source::soundcloud:
+        return "https://www.soundcloud.com/" + TrackId;
+    case source::vimeo:
+        return "https://vimeo.com/" + TrackId;
+    default: return std::string(); 
+    }
+}
+
 bool song::try_process_youtube_link(const char* pLink)
 {
     bx::cmatch match;

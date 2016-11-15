@@ -5,6 +5,8 @@ build/ipch
 include/irc/irc_debug_data.h
 include/db/db_debug_data.h
 
+db_private.sql
+
 *.db
 *.opendb
 

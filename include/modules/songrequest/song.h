@@ -34,6 +34,7 @@ public:
 public:
     void                    parse_link(const char* pLink);
     void                    parse_iso8601_created_date(const std::string& stringRep);
+    std::string             get_standardized_link() const;
 private:
     bool                    try_process_youtube_link(const char* pLink);
     bool                    try_process_soundcloud_link(const char* pLink);
@@ -48,7 +49,7 @@ public:
     duration                Length;
     bool                    Banned;
     bool                    BanOnRequest;
-    duration                BanLength;
+    int                     BanLength; // seconds
     error                   Error;
     clock_type::time_point  CreatedAt;
 };

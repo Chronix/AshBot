@@ -127,7 +127,8 @@ bool youtube::parse_json(std::string& json, song& songData, const char* streamer
         }
     }
 
-    if (!jp::json_query(item, "$.status.embeddable").as_bool())
+    jc::json embeddable = jp::json_query(item, "$.status.embeddable");
+    if (embeddable.size() == 0 || !embeddable[0].as_bool())
     {
         songData.Error = song::error::not_embeddable;
         return false;

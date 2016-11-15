@@ -43,6 +43,12 @@
     <Filter Include="Source Files\modules\songrequest">
       <UniqueIdentifier>{e5e00608-77e2-4feb-b0d1-a8813db97341}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\remote">
+      <UniqueIdentifier>{c6ce41b1-0c52-40e7-b493-f575eec78fca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\remote">
+      <UniqueIdentifier>{12744b12-4dac-4b18-8207-d32b8437cd5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -110,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\modules\songrequest\vimeo_api.cpp">
       <Filter>Source Files\modules\songrequest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\remote\control_server.cpp">
+      <Filter>Source Files\remote</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\context_object.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +245,19 @@
     <ClInclude Include="..\..\include\websocketpp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\remote\control_server.h">
+      <Filter>Header Files\remote</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\include\cc_queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\commands\songrequest_commands.h">
+      <Filter>Header Files\commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\twitch_user.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\include\ref_counted_object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

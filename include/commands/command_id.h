@@ -10,6 +10,8 @@ enum class command_id
     min_id = -1,
     roulette,
 
+    songrequest,
+
     max_id
 };
 

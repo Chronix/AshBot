@@ -1,5 +1,4 @@
 #include "irc/twitch_irc_client.h"
-#include "util.h"
 
 namespace ashbot {
 
@@ -39,8 +38,7 @@ void twitch_irc_client::dispatch_message(irc_message_data* pData)
     static constexpr int start = static_cast<int>(receive_type::channel_notice);
     static constexpr int end = static_cast<int>(receive_type::usernotice);
 
-    int rt = static_cast<int>(pData->receiveType);
-    assert(static_cast<unsigned>(rt - start) < array_size(handlers));
+    int rt = static_cast<int>(pData->get_receive_type());
     if (rt >= start && rt <= end) std::invoke(handlers[rt - start], this, pData);
     else irc_client::dispatch_message(pData);
 }

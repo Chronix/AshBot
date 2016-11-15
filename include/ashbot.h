@@ -1,3 +1,11 @@
 #pragma once
 
-#define ASHBOT_CHANNEL  "ashwinitv"
+#define ASHBOT_CHANNEL      "ashwinitv"
+#define STREAMER_COUNTRY    "CZ"
+#define SR_BASE_URL         "http://192.168.1.115:8085/SongRequest/"
+
+#ifdef _MSC_VER
+# define ASHBOT_NOVTABLE __declspec(novtable)
+#else
+# define ASHBOT_NOVTABLE
+#endif

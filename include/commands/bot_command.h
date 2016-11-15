@@ -3,11 +3,11 @@
 #include <chrono>
 #include <memory>
 
-#include "irc/irc_message_data.h"
 #include "command_id.h"
 #include "context_object.h"
 #include "access_level.h"
 #include "string_pool.h"
+#include "twitch_user.h"
 
 namespace ashbot {
     
@@ -17,7 +17,7 @@ namespace commands {
 
 using command_clock = std::chrono::steady_clock;
 
-class bot_command_base : public context_object<channel_context*>
+class bot_command_base : public context_object
 {
     friend channel_context;
 public:
@@ -31,17 +31,19 @@ public:
     command_id                  id() const { return id_; }
 protected:
     virtual void                set_message(char* pMessage) = 0;
-    virtual void                set_params(channel_context* pContext, const char* pUser) = 0;
+    virtual void                set_params(channel_context* pContext, twitch_user* pUser) = 0;
 
     bool                        accessible_by(user_access_level level) const;
 protected:
     command_id                  id_;
-    char                        user_[irc_message_data::MAX_USERNAME_LENGTH];
+    twitch_user::ptr            user_;
     user_access_level           requiredAccess_;
     command_clock::duration     cooldown_;
     bool                        restrictMods_;
     bool                        offlineOnly_;
 };
+
+#define AshBotCommandAccessCheck(level) do { if (!accessible_by(level)) return; } while (false)
 
 inline bot_command_base::bot_command_base(command_id id, size_t cooldown,
                                           user_access_level requiredAccess,
@@ -53,7 +55,6 @@ inline bot_command_base::bot_command_base(command_id id, size_t cooldown,
     ,   restrictMods_(restrictMods)
     ,   offlineOnly_(offlineOnly)
 {
-    user_[0] = 0;
 }
 
 inline bool bot_command_base::accessible_by(user_access_level level) const
@@ -76,7 +77,7 @@ protected:
                                 bot_command();
 protected:
     void                        set_message(char* pMessage) override {}
-    void                        set_params(channel_context* pContext, const char* pUser) override;
+    void                        set_params(channel_context* pContext, twitch_user* pUser) override;
 };
 
 template <typename _Traits>
@@ -87,22 +88,22 @@ bot_command<_Traits>::bot_command()
 }
 
 template <typename _Traits>
-void bot_command<_Traits>::set_params(channel_context* pContext, const char* pUser)
+void bot_command<_Traits>::set_params(channel_context* pContext, twitch_user* pUser)
 {
-    context_ = pContext;
-    strcpy(user_, pUser);
+    set_context(pContext);
+    user_.reset(pUser);
 }
 
 template<typename _Traits>
 class bot_command_with_args : public bot_command<_Traits>
 {
 protected:
-    size_t                      ArgCount() const { return args_.size(); }
+    size_t                      arg_count() const { return args_.size(); }
 
     template<typename _TArg>
-    std::enable_if_t<std::is_integral<_TArg>::value, bool> Arg(_TArg& value, int index = 0)
+    std::enable_if_t<std::is_integral<_TArg>::value, bool> arg(_TArg& value, int index = 0)
     {
-        if (index >= ArgCount()) return false;
+        if (index >= arg_count()) return false;
         
         const char* argVal = args_[index];
         char* ePtr = nullptr;
@@ -114,11 +115,16 @@ protected:
         return true;
     }
 
-    bool Arg(const char*& value, int index = 0)
+    bool arg(const char*& value, int index = 0)
     {
-        if (index >= ArgCount()) return false;
+        if (index >= arg_count()) return false;
         value = args_[index];
         return true;
+    }
+
+    bool arg_streq(const char* pValue, int index = 0)
+    {
+        return strcmp(args_[index], pValue) == 0;
     }
 
     void                        set_message(char* pMessage) override;
