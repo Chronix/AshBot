@@ -48,6 +48,18 @@ protected:
         base_type::release_impl(newRef);
     }
 private:
+    bool requires_user_id() const
+    {
+        // to be modified as needed
+        switch (receiveType_)
+        {
+        case receive_type::channel_message:
+        case receive_type::channel_action:
+            return true;
+        default: return false;
+        }
+    }
+
     void update_user(const char* pUsername, size_t usernameLen)
     {
         user_ = twitch_user::create();
@@ -63,7 +75,14 @@ private:
         if (it != tags_.end()) displayName.swap(it->second);
         // we can just take it             ^^^^^^^^^^^^^^^
 
-        user_->set(pUsername, usernameLen, move(displayName), mod, sub);
+        it = tags_.find("user-id");
+        if (requires_user_id() && it == tags_.end())
+        {
+            AshBotLogFatal << "Message does not contain user-id";
+            abort();
+        }
+
+        user_->set(stoll(it->second), pUsername, usernameLen, move(displayName), mod, sub);
     }
 private:
     // this is a little derp in the design because we have

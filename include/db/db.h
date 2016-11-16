@@ -6,6 +6,7 @@
 
 #include <libpq/libpq-fe.h>
 
+#include "ashbot.h"
 #include "byteorder.h"
 #include "cc_queue.h"
 #include "db_types.h"
@@ -105,8 +106,6 @@ private:
 
 class db
 {
-public:
-    using user_id = int64_t;
 public:
                             ~db();
 private:

@@ -2,6 +2,7 @@
 
 #include <string>
 
+#include "ashbot.h"
 #include "object_cache.h"
 
 #define TWITCH_USERNAME_MAX_LENGTH 32 // it's actually 25
@@ -23,12 +24,14 @@ public:
         return ptr(get_ptr());
     }
 
+    user_id id() const { return id_; }
     const char* username() const { return username_; }
     bool mod() const { return moderator_; }
     bool sub() const { return subscriber_; }
 private:
-    void set(const char* pUsername, size_t usernameLen, std::string&& pDisplayName, bool mod, bool sub)
+    void set(user_id id, const char* pUsername, size_t usernameLen, std::string&& pDisplayName, bool mod, bool sub)
     {
+        id_ = id;
         assert(usernameLen < TWITCH_USERNAME_MAX_LENGTH);
         memcpy(username_, pUsername, usernameLen);
         username_[usernameLen] = 0;
@@ -37,6 +40,7 @@ private:
         subscriber_ = sub;
     }
 private:
+    user_id                     id_;
     char                        username_[TWITCH_USERNAME_MAX_LENGTH];
     // this will be a dupe for most users, but it will be swapped from
     // irc_message_data::tags_["display-name"] so no actual memory is wasted

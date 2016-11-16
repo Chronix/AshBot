@@ -16,13 +16,16 @@ db::~db()
 
 int64_t db::get_user(const char* pUsername)
 {
-    static constexpr char SQL_GET_USER[] = "SELECT get_user($1::varchar);";
+    static constexpr char SQL_GET_USER[] = "SELECT id FROM users WHERE username = $1::varchar;";
 
     db_result result = query(SQL_GET_USER, pUsername);
     int64_t id = -1;
 
     if (!result.is_ok() || result.row_count() != 1)
     {
+        // possibly look up user id through some twitch api
+        // info about this unclear as of 16/11/2016
+
         AshBotLogError << "Failed to get user id for user " << pUsername
                        << " [" << result.error_message() << "]";
     }

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #define ASHBOT_CHANNEL      "ashwinitv"
 #define STREAMER_COUNTRY    "CZ"
 #define SR_BASE_URL         "http://192.168.1.115:8085/SongRequest/"
@@ -9,3 +11,9 @@
 #else
 # define ASHBOT_NOVTABLE
 #endif
+
+namespace ashbot {
+
+using user_id = int64_t;
+
+}

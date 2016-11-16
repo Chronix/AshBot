@@ -157,7 +157,7 @@ bool songrequest_provider::load_config()
 
     for (int i = 0; i < dbLimits.row_count(); ++i)
     {
-        db::user_id userid;
+        user_id userid;
         dbLimits.read_column(userid, i, 0);
 
         short count;
@@ -282,11 +282,9 @@ void songrequest_provider::request_song(request_item_ptr&& item)
     int64_t position;
     result.read_column(position, 0, 0);
 
-    db::user_id userId = db::get().get_user(item->RequestedBy->username());
-
     static constexpr char SQL_INSERT_NEW_REQUEST[] = "INSERT INTO song_requests(song_id, user_id, pos) " 
                                                      "VALUES($1::bigint, $2::bigint, $3::bigint) RETURNING id;";
-    result = db::get().query(SQL_INSERT_NEW_REQUEST, s.Id, userId, position);
+    result = db::get().query(SQL_INSERT_NEW_REQUEST, s.Id, item->RequestedBy->id(), position);
 
     if (!result)
     {

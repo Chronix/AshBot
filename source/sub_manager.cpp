@@ -71,7 +71,7 @@ void add_sub(const char* pName)
         Subscribers.emplace(pName);
     }
 
-    db::user_id userId = db::get().get_user(pName);
+    user_id userId = db::get().get_user(pName);
     db_result rSub = db::get().query(SQL_SET_SUB, userId);
     if (!rSub)
     {
@@ -131,7 +131,7 @@ int add_regular(const char* pName)
 {
     if (is_regular(pName, false)) return 1;
 
-    db::user_id userId = db::get().get_user(pName);
+    user_id userId = db::get().get_user(pName);
     if (userId == db::InvalidUserId) return -1;
 
     static constexpr char SQL_ADD_REGULAR[] = "UPDATE users SET regular = TRUE WHERE id = $1::bigint";
