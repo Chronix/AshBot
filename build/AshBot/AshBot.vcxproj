@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -20,13 +20,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -46,15 +46,15 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(Path);$(IncludePath)</IncludePath>
-    <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(CLibs);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BoostRoot)\stage\lib\x64;$(CLibs);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)..\bin\x64\$(Configuration)\</OutDir>
     <IntDir>$(ProjectDir)int\x64\$(Configuration)\</IntDir>
-    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(Path);$(IncludePath)</IncludePath>
-    <LibraryPath>$(BoostRoot)stage\lib\x64;$(Path);$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)..\include;$(BoostRoot);$(SolutionDir)..\libs;$(SolutionDir)..\libs\jsoncons\src;$(SolutionDir)..\libs\websocketpp;$(CLibs);$(IncludePath)</IncludePath>
+    <LibraryPath>$(BoostRoot)\stage\lib\x64;$(CLibs);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
