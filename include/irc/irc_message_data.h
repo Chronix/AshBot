@@ -82,7 +82,8 @@ private:
             abort();
         }
 
-        user_->set(stoll(it->second), pUsername, usernameLen, move(displayName), mod, sub);
+        user_->set(it != tags_.end() ? stoll(it->second) : 0,
+                   pUsername, usernameLen, move(displayName), mod, sub);
     }
 private:
     // this is a little derp in the design because we have
