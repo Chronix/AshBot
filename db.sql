@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.1
+-- Dumped from database version 9.6.2
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -243,7 +244,8 @@ ALTER SEQUENCE songs_id_seq OWNED BY songs.id;
 
 CREATE TABLE sr_data (
     id smallint NOT NULL,
-    value character varying(32) NOT NULL
+    value character varying(32) NOT NULL,
+    comment character varying(50)
 );
 
 
@@ -300,21 +302,21 @@ CREATE TABLE user_id_counter (
 ALTER TABLE user_id_counter OWNER TO ashbot;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: ashbot
+-- Name: song_requests id; Type: DEFAULT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY song_requests ALTER COLUMN id SET DEFAULT nextval('song_requests_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: ashbot
+-- Name: songs id; Type: DEFAULT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY songs ALTER COLUMN id SET DEFAULT nextval('songs_id_seq'::regclass);
 
 
 --
--- Name: pk_sr_data; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: sr_data pk_sr_data; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY sr_data
@@ -322,7 +324,7 @@ ALTER TABLE ONLY sr_data
 
 
 --
--- Name: pk_sr_limits; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: sr_limits pk_sr_limits; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY sr_limits
@@ -330,7 +332,7 @@ ALTER TABLE ONLY sr_limits
 
 
 --
--- Name: pk_tokens; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: tokens pk_tokens; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY tokens
@@ -338,7 +340,7 @@ ALTER TABLE ONLY tokens
 
 
 --
--- Name: pk_users; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: users pk_users; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY users
@@ -346,7 +348,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: song_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: song_requests song_requests_pkey; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY song_requests
@@ -354,7 +356,7 @@ ALTER TABLE ONLY song_requests
 
 
 --
--- Name: songs_pkey; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: songs songs_pkey; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY songs
@@ -362,7 +364,7 @@ ALTER TABLE ONLY songs
 
 
 --
--- Name: uk_users; Type: CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: users uk_users; Type: CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY users
@@ -370,7 +372,7 @@ ALTER TABLE ONLY users
 
 
 --
--- Name: fk_sr_limits_users; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: sr_limits fk_sr_limits_users; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY sr_limits
@@ -378,7 +380,7 @@ ALTER TABLE ONLY sr_limits
 
 
 --
--- Name: song_requests_song_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: song_requests song_requests_song_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY song_requests
@@ -386,7 +388,7 @@ ALTER TABLE ONLY song_requests
 
 
 --
--- Name: song_requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
+-- Name: song_requests song_requests_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: ashbot
 --
 
 ALTER TABLE ONLY song_requests
@@ -397,11 +399,7 @@ ALTER TABLE ONLY song_requests
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO ashbot;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --
