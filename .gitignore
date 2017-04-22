@@ -1,6 +1,6 @@
 bin
 build/*/int
-build/ipch
+build/.vs
 
 include/irc/irc_debug_data.h
 include/db/db_debug_data.h
