@@ -15,7 +15,7 @@ void channel_context::register_commands()
     commandFactory_.register_command<songrequest_command>("songrequest", "sr", "requestsong", "srq", "ohgodohgodohgod");
     
     cooldownMap_.reserve(static_cast<size_t>(command_id::max_id));
-    command_clock::time_point lastUse = command_clock::now() - std::chrono::hours(1);
+    bot_clock::time_point lastUse = bot_clock::now() - std::chrono::hours(1);
     
     for (int id = static_cast<int>(command_id::min_id) + 1;
          id < static_cast<int>(command_id::max_id);

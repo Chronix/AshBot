@@ -1,11 +1,11 @@
 #pragma once
 
-#include <chrono>
 #include <memory>
 
+#include "access_level.h"
+#include "ashbot.h"
 #include "command_id.h"
 #include "context_object.h"
-#include "access_level.h"
 #include "string_pool.h"
 #include "twitch_user.h"
 
@@ -14,8 +14,6 @@ namespace ashbot {
 class channel_context;
 
 namespace commands {
-
-using command_clock = std::chrono::steady_clock;
 
 class bot_command_base : public context_object
 {
@@ -38,7 +36,7 @@ protected:
     command_id                  id_;
     twitch_user::ptr            user_;
     user_access_level           requiredAccess_;
-    command_clock::duration     cooldown_;
+    bot_clock::duration         cooldown_;
     bool                        restrictMods_;
     bool                        offlineOnly_;
 };

@@ -173,8 +173,8 @@ bool channel_context::is_command_cooldown_ok(command_ptr& command, irc_message_d
 
     boost::upgrade_lock<boost::shared_mutex> sl(cdMutex_);
     
-    command_clock::time_point lastUse = cooldownMap_[command->id()];
-    if (command_clock::now() - lastUse < command->cooldown_)
+    bot_clock::time_point lastUse = cooldownMap_[command->id()];
+    if (bot_clock::now() - lastUse < command->cooldown_)
     {
         return !command->restrictMods_ && pContext->mod();
     }

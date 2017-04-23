@@ -33,7 +33,7 @@ class songrequest_provider;
 
 class channel_context
 {
-    using cooldown_map = boost::container::flat_map<command_id, command_clock::time_point>;
+    using cooldown_map = boost::container::flat_map<command_id, bot_clock::time_point>;
 public:
     static constexpr char   command_prefix = '!';
 public:
